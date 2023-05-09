@@ -1,0 +1,14 @@
+.feed-container{
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.profile-container{
+}
+.post-container{
+  align-self: stretch;
+  border: 1px solid var(--nest);
+  border-radius: 1rem;
+}
+.messages-container{
+}

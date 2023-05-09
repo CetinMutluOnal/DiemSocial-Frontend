@@ -1,0 +1,19 @@
+<div class="feed-container">
+  <div class="profile-container col-3">
+    <button (click) = "logout()" class="btn btn-warning btn-block btn-m">Logout</button>
+  </div>
+  <div class="post-container col-6">
+    <div *ngFor="let post of posts">
+      <h3> {{post.author.username}}</h3>
+      <p>{{ post.post.content}}</p>
+    </div>
+  </div>
+
+  <div class="messages-container col-3">
+    <!-- <div *ngFor="let post of posts.followedUserPost">
+      <h3> {{ post.userId}}</h3>
+      <p>{{ post.content }}</p>
+    </div> -->
+  </div>
+</div>
+

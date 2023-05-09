@@ -1,0 +1,17 @@
+<div class="main-container">
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="form-container">
+      <input type="file"  formControlName="avatar" accept="image/*" id="avatar" class="profile-picture" >
+    <div class="form-group">
+      <input placeholder="name" formControlName="name">
+      <input placeholder="username" formControlName="username">
+      <input placeholder="email" type="email" formControlName="email">
+      <input placeholder="password" type="password" formControlName="password">
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-danger btn-block btn-lg">Sign Up</button>
+    </div>
+
+
+  </form>
+</div>

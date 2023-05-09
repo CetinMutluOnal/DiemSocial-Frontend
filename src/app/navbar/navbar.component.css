@@ -1,0 +1,15 @@
+.navbar{
+  width: 80vh;
+  height: 5vh;
+  display: flex;
+  flex-wrap: nowrap;
+  margin: auto;
+  justify-content: space-around;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+  background-color: var(--nest);
+
+}
+.navbar a{
+  text-decoration: none;
+  color: white;
+}

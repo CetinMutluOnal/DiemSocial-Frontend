@@ -2,10 +2,30 @@
   <div class="profile-container col-3">
     <button (click) = "logout()" class="btn btn-warning btn-block btn-m">Logout</button>
   </div>
-  <div class="post-container col-6">
-    <div *ngFor="let post of posts">
-      <h3> {{post.author.username}}</h3>
-      <p>{{ post.post.content}}</p>
+  <div class="posts-container col-6">
+    <div class="post-container" *ngFor="let post of posts">
+        <!-- <img *ngIf='post.author.avatar =="" ' id="profile-picture" [src]="defaultImagePath" >
+        <img *ngIf='post.author.avatar !="" ' id="profile-picture" [src]="'http://localhost:3000/' + post.author.avatar" > -->
+
+        <ng-container *ngIf='post.author.avatar == "" ; else elseTemplate'>
+          <div class="col-2 image-container">
+            <img class="profile-picture" [src]="defaultImagePath" >
+          </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="col-2 image-container">
+            <img class="profile-picture" [src]="'http://localhost:3000/' + post.author.avatar" >
+          </div>
+        </ng-template>
+
+
+        <div class="post-card col-10">
+          <p>{{post.author.name}}</p>
+          <p>{{ post.post.content}}</p>
+        </div>
+        <div *ngIf="post.post.media != null" class="post-image">
+          <img class="image" [src]="'http://localhost:3000/' + post.post.media" >
+        </div>
     </div>
   </div>
 

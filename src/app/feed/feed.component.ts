@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class FeedComponent implements OnInit {
   userId: string[] = [];
   posts: Array<object> | any = [];
+  defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
 
   constructor(
     private feedService: FeedService,

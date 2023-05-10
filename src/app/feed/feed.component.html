@@ -1,8 +1,10 @@
+
 <div class="feed-container">
   <div class="profile-container col-3">
     <button (click) = "logout()" class="btn btn-warning btn-block btn-m">Logout</button>
   </div>
   <div class="posts-container col-6">
+    <app-new-post></app-new-post>
     <div class="post-container" *ngFor="let post of posts">
         <!-- <img *ngIf='post.author.avatar =="" ' id="profile-picture" [src]="defaultImagePath" >
         <img *ngIf='post.author.avatar !="" ' id="profile-picture" [src]="'http://localhost:3000/' + post.author.avatar" > -->

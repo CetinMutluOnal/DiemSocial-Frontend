@@ -7,7 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule} from '@angular/forms';
 import { FeedComponent } from './feed/feed.component';
-import { NavbarComponent } from './navbar/navbar.component'
+import { NavbarComponent } from './navbar/navbar.component';
+import { NewPostComponent } from './new-post/new-post.component'
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NavbarComponent } from './navbar/navbar.component'
     SignupComponent,
     FeedComponent,
     NavbarComponent,
+    NewPostComponent,
   ],
   imports: [
     BrowserModule,

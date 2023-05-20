@@ -1,0 +1,66 @@
+
+<div class="feed-container">
+  <div class="profile-container col-3">
+    <button class="btn btn-warning btn-block btn-m">Logout</button>
+  </div>
+  <div class="posts-container col-6" *ngFor="let post of post">
+      <div class="header col-4">
+        <a class="bi bi-arrow-left" (click)="returnLastPage()"></a>
+        <p>Post</p>
+    </div>
+    <div class="post-container">
+      <ng-container *ngIf='post.author[0].avatar == "" ; else elseTemplate'>
+          <img class="col-2 profile-picture" [src]="defaultImagePath" >
+      </ng-container>
+      <ng-template #elseTemplate>
+          <img class="col-2 profile-picture" [src]="'http://localhost:3000/' + post.author[0].avatar" >
+      </ng-template>
+
+        <div class="post-card col-10" >
+          <p id="username"(click)="$event.stopPropagation()">{{post.author[0].name}}</p>
+          <p>{{post.content}}</p>
+        </div>
+        <div *ngIf="post.media != null" class="post-image">
+          <img class="image" [src]="'http://localhost:3000/'+ post.media" >
+        </div>
+        <div class="actions">
+          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(post[0]._id)"> {{post.likes.length}}</i>
+          <i class="bi bi-chat">{{comments.length}}</i>
+        </div>
+    </div>
+    <div *ngIf="comments.length != 0" class="comments-card">
+      <div *ngFor="let comment of comments" class="post-container">
+        <ng-container *ngIf='comment.author[0].avatar == "" ; else elseTemplate'>
+          <img class="col-2 profile-picture" [src]="defaultImagePath" >
+        </ng-container>
+        <ng-template #elseTemplate>
+            <img class="col-2 profile-picture" [src]="'http://localhost:3000/' + comment.author[0].avatar" >
+        </ng-template>
+          <div class="post-card col-10" >
+            <p id="username"(click)="$event.stopPropagation()">{{comment.author[0].name}}</p>
+            <p>{{comment.content}}</p>
+          </div>
+          <div *ngIf=' comment.media != "" ' class="post-image">
+            <img class="image" [src]="'http://localhost:3000/'+ comment.media" >
+          </div>
+          <div class="actions">
+            <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(comment._id)"></i>
+            <i class="bi bi-chat">{{comment.replies.length}}</i>
+          </div>
+      </div>
+
+
+      <!-- <div *ngFor="let comment of post[0].comments" class="post-card col-10" >
+        <p id="username"(click)="$event.stopPropagation()">{{comment.commentAuthor.name}}</p>
+        <p>{{comment.content}}</p>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="messages-container col-3">
+    <!-- <div *ngFor="let post of posts.followedUserPost">
+      <h3> {{ post.userId}}</h3>
+      <p>{{ post.content }}</p>
+    </div> -->
+  </div>
+</div>

@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PostService {
-  private PostPath = 'http://localhost:3000/post/'
+  private PostPath = 'http://localhost:3000/post'
   constructor(private httpClient: HttpClient) { }
 
   createPost(data: any) {
@@ -14,5 +14,9 @@ export class PostService {
         'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
       })
     });
+  }
+
+  getPostById(postId: string | null) {
+    return this.httpClient.get(`${this.PostPath}/detail/${postId}`)
   }
 }

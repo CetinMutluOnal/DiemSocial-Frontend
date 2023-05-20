@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedService } from '../services/feed.service';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PostDetailComponent } from '../post-detail/post-detail.component';
+import { LikeService } from '../services/like.service';
 
 @Component({
   selector: 'app-feed',
@@ -11,12 +13,15 @@ import { Router } from '@angular/router';
 export class FeedComponent implements OnInit {
   userId: string[] = [];
   posts: Array<object> | any = [];
+  isLiked = false;
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
+
 
   constructor(
     private feedService: FeedService,
     private authService:AuthService,
-    private router: Router
+    private likeService: LikeService,
+    private router: Router,
     ) {}
 
   ngOnInit(): void {
@@ -31,12 +36,27 @@ export class FeedComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout(localStorage.getItem('accessToken')).subscribe({
+    this.authService.logout().subscribe({
       next: () => this.authService.removeTokens(),
       error: (error) => console.log(error),
     });
     this.router.navigate(['/login']);
     this.authService.stopRefreshTokenTimer();
+  }
+
+  redirectPostDetail(postId: string) {
+    this.router.navigate([`/post/${postId}`]);
+  }
+
+  redirectUserDetail(username: string) {
+    this.router.navigate([`/user/${username}`]);
+  }
+
+  likePost(postId:string) {
+    this.likeService.createLike(postId).subscribe({
+      next: (response) => this.isLiked = true,
+      error: (error) => console.log(error),
+    })
   }
 
 

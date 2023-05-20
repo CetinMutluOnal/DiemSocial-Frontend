@@ -23,7 +23,9 @@ export class NewPostComponent implements OnInit {
     let media: any | HTMLInputElement = this.el.nativeElement.querySelector('#media');
     var formData: FormData = new FormData();
     formData.append("content",this.form.value.content);
-    formData.append("media",media?.files?.item(0));
+    if (this.form.value.media != null) {
+      formData.append("media",media?.files?.item(0));
+    }
 
 
     this.postService.createPost(formData).subscribe({
@@ -36,7 +38,7 @@ export class NewPostComponent implements OnInit {
   clearForm(){
     this.form.reset({
       content: '',
-      media: null,
+      media: '',
     });
   }
 

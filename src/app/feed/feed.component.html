@@ -1,32 +1,28 @@
-
 <div class="feed-container">
   <div class="profile-container col-3">
     <button (click) = "logout()" class="btn btn-warning btn-block btn-m">Logout</button>
   </div>
   <div class="posts-container col-6">
     <app-new-post></app-new-post>
-    <div class="post-container" *ngFor="let post of posts">
-        <!-- <img *ngIf='post.author.avatar =="" ' id="profile-picture" [src]="defaultImagePath" >
-        <img *ngIf='post.author.avatar !="" ' id="profile-picture" [src]="'http://localhost:3000/' + post.author.avatar" > -->
-
+    <div class="post-container" *ngFor="let post of posts" (click)="redirectPostDetail(post.post.id)">
         <ng-container *ngIf='post.author.avatar == "" ; else elseTemplate'>
-          <div class="col-2 image-container">
-            <img class="profile-picture" [src]="defaultImagePath" >
-          </div>
+            <img class="col-2 profile-picture" [src]="defaultImagePath" >
         </ng-container>
         <ng-template #elseTemplate>
-          <div class="col-2 image-container">
-            <img class="profile-picture" [src]="'http://localhost:3000/' + post.author.avatar" >
-          </div>
+            <img class=" col-2 profile-picture" [src]="'http://localhost:3000/' + post.author.avatar" >
         </ng-template>
 
 
-        <div class="post-card col-10">
-          <p>{{post.author.name}}</p>
+        <div class="post-card col-10" >
+          <p id="username"(click)="$event.stopPropagation(); redirectUserDetail(post.author.username)">{{post.author.name}}</p>
           <p>{{ post.post.content}}</p>
         </div>
         <div *ngIf="post.post.media != null" class="post-image">
           <img class="image" [src]="'http://localhost:3000/' + post.post.media" >
+        </div>
+        <div class="actions">
+          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(post._id)"></i>
+            <i class="bi bi-chat">0</i>
         </div>
     </div>
   </div>

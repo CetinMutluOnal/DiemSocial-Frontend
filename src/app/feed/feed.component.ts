@@ -12,7 +12,7 @@ import { LikeService } from '../services/like.service';
 })
 export class FeedComponent implements OnInit {
   userId: string[] = [];
-  posts: Array<object> | any = [];
+  follows: Array<object> | any = [];
   isLiked = false;
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
 
@@ -29,7 +29,7 @@ export class FeedComponent implements OnInit {
       this.feedService.ngOnInit().subscribe({
         next: (response) => {
           const posts: any = response;
-          this.posts = posts?.followedUserPost;
+          this.follows = posts?.follows;
         } ,
         error: (error) => console.log(error),
       });

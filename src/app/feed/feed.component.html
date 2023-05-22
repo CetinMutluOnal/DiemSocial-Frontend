@@ -4,24 +4,24 @@
   </div>
   <div class="posts-container col-6">
     <app-new-post></app-new-post>
-    <div class="post-container" *ngFor="let post of posts" (click)="redirectPostDetail(post.post.id)">
-        <ng-container *ngIf='post.author.avatar == "" ; else elseTemplate'>
+    <div class="post-container" *ngFor="let followed of follows" (click)="redirectPostDetail(followed.post._id)">
+        <ng-container *ngIf='followed.user.avatar == "" ; else elseTemplate'>
             <img class="col-2 profile-picture" [src]="defaultImagePath" >
         </ng-container>
         <ng-template #elseTemplate>
-            <img class=" col-2 profile-picture" [src]="'http://localhost:3000/' + post.author.avatar" >
+            <img class=" col-2 profile-picture" [src]="'http://localhost:3000/' + followed.user.avatar" >
         </ng-template>
 
 
         <div class="post-card col-10" >
-          <p id="username"(click)="$event.stopPropagation(); redirectUserDetail(post.author.username)">{{post.author.name}}</p>
-          <p>{{ post.post.content}}</p>
+          <p id="username"(click)="$event.stopPropagation(); redirectUserDetail(followed.user.username)">{{followed.user.name}}</p>
+          <p>{{ followed.post.content}}</p>
         </div>
-        <div *ngIf="post.post.media != null" class="post-image">
-          <img class="image" [src]="'http://localhost:3000/' + post.post.media" >
+        <div *ngIf="followed.post.media != null" class="post-image">
+          <img class="image" [src]="'http://localhost:3000/' + followed.post.media" >
         </div>
         <div class="actions">
-          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(post._id)"></i>
+          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(followed.post._id)"></i>
             <i class="bi bi-chat">0</i>
         </div>
     </div>

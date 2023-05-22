@@ -20,11 +20,18 @@ export class AuthService {
   signIn(data: any) {
     return this.httpClient.post(`${this.authUrl}/login`, data);
   }
+  getAuthenticatedUser(){
+    return this.httpClient.get(`${this.authUrl}/profile`, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+      })
+    })
+  }
 
-  logout(accessToken: string | null) {
+  logout() {
     return this.httpClient.get(`${this.authUrl}/logout`, {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + accessToken,
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
       })
     })
   }

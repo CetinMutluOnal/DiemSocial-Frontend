@@ -15,7 +15,11 @@ private UserUrl = "http://localhost:3000/user";
   }
 
   getUserById(userId: string) {
-    return this.httpClient.get(`${this.UserUrl}/${userId}`);
+    return this.httpClient.get(`${this.UserUrl}/id/${userId}`);
+  }
+
+  getUserByUsername(username: string | null) {
+    return this.httpClient.get(`${this.UserUrl}/${username}`);
   }
 
   deleteUserById(userId: string) {

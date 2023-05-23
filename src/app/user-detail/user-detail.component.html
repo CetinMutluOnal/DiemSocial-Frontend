@@ -1,1 +1,53 @@
-<p>user-detail works!</p>
+<div class="feed-container">
+  <div class="profile-container col-3">
+    <button class="btn btn-warning btn-block btn-m">Logout</button>
+  </div>
+  <div class="posts-container col-6" *ngFor="let _user of user ">
+      <div class="header col-4">
+        <a class="bi bi-arrow-left" (click)="returnLastPage()"></a>
+        <p>Profile</p>
+    </div>
+    <div class="profile-detail-container">
+      <ng-container *ngIf='_user.avatar == "" || null ; else elseTemplate'>
+        <img class="col-4 profile-picture-detail" [src]="defaultImagePath" >
+    </ng-container>
+    <ng-template #elseTemplate>
+        <img class="col-4 profile-picture-detail" [src]="'http://localhost:3000/' + _user.avatar" >
+    </ng-template>
+    <div class="about">
+      <p>{{_user.name}}</p>
+      <p>{{_user.username}}</p>
+      <p>Following {{counts.follows}}</p>
+      <p>Follower {{counts.followers}}</p>
+    </div>
+    <div class="interactions">
+      <i class="bi bi-person-add fa-sm"></i>
+      <i class="bi bi-envelope bi-xl"></i>
+    </div>
+    </div>
+    <div class="post-container" *ngFor="let post of posts ">
+      <ng-container *ngIf='_user.avatar == "" || null ; else elseTemplate'>
+          <img class="col-2 profile-picture" [src]="defaultImagePath" >
+      </ng-container>
+      <ng-template #elseTemplate>
+          <img class="col-2 profile-picture" [src]="'http://localhost:3000/' + _user.avatar" >
+      </ng-template>
+
+        <div class="post-card col-10" >
+          <p id="username"(click)="$event.stopPropagation()">{{_user.name}}</p>
+          <p>{{post.content}}</p>
+        </div>
+        <div *ngIf="post.media != null" class="post-image">
+          <img class="image" [src]="'http://localhost:3000/'+ post.media" >
+        </div>
+        <div class="actions">
+          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(post[0]._id)"> {{post.likes.length}}</i>
+          <i class="bi bi-chat">{{post.comments.length}}</i>
+        </div>
+    </div>
+  </div>
+
+  <div class="messages-container col-3">
+  </div>
+</div>
+

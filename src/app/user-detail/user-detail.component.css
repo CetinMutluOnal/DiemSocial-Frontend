@@ -1,0 +1,30 @@
+.profile-detail-container{
+  height: 20vh;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-picture-detail {
+  margin: 0;
+  max-width: 10rem;
+  max-height: 10rem;
+  border-radius: 50%;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  flex-grow: 0.8;
+}
+
+.interactions {
+  display: flex;
+  flex-direction: column;
+}
+
+.interactions > i {
+  font-size: x-large;
+}

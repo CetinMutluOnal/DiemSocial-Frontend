@@ -4,6 +4,7 @@ import { PostService } from '../services/post.service';
 import { Location } from '@angular/common';
 import { LikeService } from '../services/like.service';
 import { CommentService } from '../services/comment.service';
+import { MyResponse } from '../types/response.type';
 
 @Component({
   selector: 'app-post-detail',
@@ -28,9 +29,8 @@ export class PostDetailComponent implements OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.postService.getPostById(this.id).subscribe({
-      next: (response) =>{
-        const postResponse: any = response
-        this.post = postResponse?.post
+      next: (response: MyResponse) =>{
+        this.post = response.data;
         console.log(this.post)
         this.getComments(this.id);
       },
@@ -44,16 +44,15 @@ export class PostDetailComponent implements OnInit {
 
   likePost(postId:string) {
     this.likeService.createLike(postId).subscribe({
-      next: (response) => this.isLiked = true,
+      next: (response: MyResponse) => this.isLiked = true,
       error: (error) => console.log(error),
     })
   }
 
   async getComments(postId: any) {
     this.commentService.getPostComments(postId).subscribe({
-      next: (response) => {
-        const postResponse: any = response;
-        this.comments = postResponse?.comments;
+      next: (response: MyResponse) => {
+        this.comments = response.data;
         console.log('comments => ',this.comments);
       },
       error: (error) => console.log(error),

@@ -59,7 +59,7 @@ export class UserDetailComponent implements OnInit{
 
     likePost(postId:string) {
       this.likeService.createLike(postId).subscribe({
-        next: (response) => this.isLiked = true,
+        next: (response: MyResponse) => this.isLiked = true,
         error: (error) => console.log(error),
       })
     }

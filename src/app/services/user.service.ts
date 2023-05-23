@@ -12,11 +12,11 @@ private UserUrl = "http://localhost:3000/user";
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllUsers() {
+  getAllUsers():Observable<any> {
     return this.httpClient.get(this.UserUrl);
   }
 
-  getUserById(userId: string) {
+  getUserById(userId: string): Observable<any> {
     return this.httpClient.get(`${this.UserUrl}/id/${userId}`);
   }
 
@@ -24,7 +24,7 @@ private UserUrl = "http://localhost:3000/user";
     return this.httpClient.get(`${this.UserUrl}/${username}`);
   }
 
-  deleteUserById(userId: string) {
+  deleteUserById(userId: string):Observable<any> {
     return this.httpClient.delete(`${this.UserUrl}/${userId}`);
   }
 

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { MyResponse } from '../types/response.type';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ private UserUrl = "http://localhost:3000/user";
     return this.httpClient.get(`${this.UserUrl}/id/${userId}`);
   }
 
-  getUserByUsername(username: string | null) {
+  getUserByUsername(username: string | null): Observable<any> {
     return this.httpClient.get(`${this.UserUrl}/${username}`);
   }
 

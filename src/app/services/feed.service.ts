@@ -9,7 +9,7 @@ export class FeedService implements OnInit {
 
   private feedUrl = 'http://localhost:3000/post/follows';
   constructor(private httpClient: HttpClient) { }
-  ngOnInit() {
+  ngOnInit(): Observable<any>{
   return this.createFeed();
 }
 

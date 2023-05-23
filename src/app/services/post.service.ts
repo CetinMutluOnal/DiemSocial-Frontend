@@ -17,7 +17,7 @@ export class PostService {
     });
   }
 
-  getPostById(postId: string | null) {
+  getPostById(postId: string | null): Observable<any>{
     return this.httpClient.get(`${this.PostPath}/detail/${postId}`)
   }
   getPostByUserId(userId: string | null): Observable<any> {

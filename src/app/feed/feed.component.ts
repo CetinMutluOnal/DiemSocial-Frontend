@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostDetailComponent } from '../post-detail/post-detail.component';
 import { LikeService } from '../services/like.service';
+import { MyResponse } from '../types/response.type';
 
 @Component({
   selector: 'app-feed',
@@ -27,9 +28,8 @@ export class FeedComponent implements OnInit {
   ngOnInit(): void {
     this.authService.startRefreshTokenTimer()
       this.feedService.ngOnInit().subscribe({
-        next: (response) => {
-          const posts: any = response;
-          this.follows = posts?.follows;
+        next: (response:MyResponse) => {
+          this.follows = response.data;
         } ,
         error: (error) => console.log(error),
       });
@@ -54,7 +54,7 @@ export class FeedComponent implements OnInit {
 
   likePost(postId:string) {
     this.likeService.createLike(postId).subscribe({
-      next: (response) => this.isLiked = true,
+      next: (response: MyResponse) => this.isLiked = true,
       error: (error) => console.log(error),
     })
   }

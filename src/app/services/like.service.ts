@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class LikeService {
     private httpClient: HttpClient,
   ) { }
 
-  createLike(postId: string) {
+  createLike(postId: string): Observable<any> {
    return this.httpClient.post(`${this.likeUrl}/${postId}`,null,{
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),

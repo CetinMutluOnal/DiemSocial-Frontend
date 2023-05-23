@@ -3,28 +3,28 @@
   <div class="profile-container col-3">
     <button class="btn btn-warning btn-block btn-m">Logout</button>
   </div>
-  <div class="posts-container col-6" *ngFor="let post of post">
+  <div class="posts-container col-6" *ngFor="let _post of post">
       <div class="header col-4">
         <a class="bi bi-arrow-left" (click)="returnLastPage()"></a>
         <p>Post</p>
     </div>
     <div class="post-container">
-      <ng-container *ngIf='post.author[0].avatar == "" ; else elseTemplate'>
+      <ng-container *ngIf='_post.author[0].avatar == "" ; else elseTemplate'>
           <img class="col-2 profile-picture" [src]="defaultImagePath" >
       </ng-container>
       <ng-template #elseTemplate>
-          <img class="col-2 profile-picture" [src]="'http://localhost:3000/' + post.author[0].avatar" >
+          <img class="col-2 profile-picture" [src]="'http://localhost:3000/' + _post.author[0].avatar" >
       </ng-template>
 
         <div class="post-card col-10" >
-          <p id="username"(click)="$event.stopPropagation()">{{post.author[0].name}}</p>
-          <p>{{post.content}}</p>
+          <p id="username"(click)="$event.stopPropagation()">{{_post.author[0].name}}</p>
+          <p>{{_post.content}}</p>
         </div>
-        <div *ngIf="post.media != null" class="post-image">
-          <img class="image" [src]="'http://localhost:3000/'+ post.media" >
+        <div *ngIf="_post.media != null" class="post-image">
+          <img class="image" [src]="'http://localhost:3000/'+ _post.media" >
         </div>
         <div class="actions">
-          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(post[0]._id)"> {{post.likes.length}}</i>
+          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(_post._id)"> {{_post.likes.length}}</i>
           <i class="bi bi-chat">{{comments.length}}</i>
         </div>
     </div>
@@ -48,12 +48,6 @@
             <i class="bi bi-chat">{{comment.replies.length}}</i>
           </div>
       </div>
-
-
-      <!-- <div *ngFor="let comment of post[0].comments" class="post-card col-10" >
-        <p id="username"(click)="$event.stopPropagation()">{{comment.commentAuthor.name}}</p>
-        <p>{{comment.content}}</p>
-      </div> -->
     </div>
   </div>
 

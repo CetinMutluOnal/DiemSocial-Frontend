@@ -14,7 +14,7 @@ const routes: Routes = [
     {path: ':id', component: PostDetailComponent}
   ]},
   {path: 'user', children: [
-    {path: ':id', component: UserDetailComponent}
+    {path: ':username', component: UserDetailComponent}
   ]},
 ];
 

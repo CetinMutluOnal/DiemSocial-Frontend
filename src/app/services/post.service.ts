@@ -13,7 +13,7 @@ export class PostService {
     return this.httpClient.post(this.PostPath,data, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-      })
+      }),
     });
   }
 

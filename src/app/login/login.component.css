@@ -1,7 +1,13 @@
+.login-page-container {
+  padding: 1rem;
+  width:100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .main-container{
   display: flex;
-  background-color: whitesmoke;
-  margin:auto;
   width: fit-content;
   height: fit-content;
 }
@@ -12,7 +18,7 @@
   display: flex;
   flex: 1, 3, 1;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   border: 3px solid var(--nest);
   border-radius: 10px ;
   box-shadow: 1px 1px 20px 1px var(--nest);
@@ -22,6 +28,15 @@
   flex-direction: column;
   gap: 2rem;
   justify-content: space-between;
+}
+
+.login{
+  flex-direction: column;
+  justify-content: center;
+}
+
+#redirect {
+  align-self: center;
 }
 
 

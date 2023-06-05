@@ -30,6 +30,7 @@ export class FeedComponent implements OnInit {
       this.feedService.ngOnInit().subscribe({
         next: (response:MyResponse) => {
           this.follows = response.data;
+          console.log(this.follows);
         } ,
         error: (error) => console.log(error),
       });
@@ -59,5 +60,10 @@ export class FeedComponent implements OnInit {
     })
   }
 
+  getPostDate(postDate: string) {
+    const date = new Date(postDate);
+
+    return date.toLocaleString();
+  };
 
 }

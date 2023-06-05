@@ -21,8 +21,9 @@
           <img class="image" [src]="'http://localhost:3000/' + followed.post.media" >
         </div>
         <div class="actions">
-          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(followed.post._id)"></i>
-            <i class="bi bi-chat">0</i>
+          <app-like (click)="$event.stopPropagation()" [postId] = "followed.post._id"></app-like>
+          <i class="bi bi-chat"  (click)="redirectPostDetail(followed.post._id)">{{followed.post.comments.length}}</i>
+          <p>{{getPostDate(followed.post.createdAt)}}</p>
         </div>
     </div>
   </div>

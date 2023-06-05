@@ -10,7 +10,12 @@ import { FeedComponent } from './feed/feed.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
-import { UserDetailComponent } from './user-detail/user-detail.component'
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { CommentDetailComponent } from './comment-detail/comment-detail.component';
+import { CommentComponent } from './comment/comment.component';
+import { NewCommentComponent } from './new-comment/new-comment.component';
+import { LikeComponent } from './like/like.component';
+import { FollowComponent } from './follow/follow.component'
 
 @NgModule({
   declarations: [
@@ -22,6 +27,11 @@ import { UserDetailComponent } from './user-detail/user-detail.component'
     NewPostComponent,
     PostDetailComponent,
     UserDetailComponent,
+    CommentDetailComponent,
+    CommentComponent,
+    NewCommentComponent,
+    LikeComponent,
+    FollowComponent,
   ],
   imports: [
     BrowserModule,

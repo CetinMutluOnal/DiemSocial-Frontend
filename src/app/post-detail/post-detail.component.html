@@ -25,31 +25,15 @@
         </div>
         <div class="actions">
           <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(_post._id)"> {{_post.likes.length}}</i>
-          <i class="bi bi-chat">{{comments.length}}</i>
+          <i class="bi bi-chat" (click)="addComment = true">{{comments.length}}</i>
+          <p>{{getPostDate(_post.createdAt)}}</p>
         </div>
     </div>
-    <div *ngIf="comments.length != 0" class="comments-card">
-      <div *ngFor="let comment of comments" class="post-container">
-        <ng-container *ngIf='comment.author[0].avatar == "" ; else elseTemplate'>
-          <img class="col-2 profile-picture" [src]="defaultImagePath" >
-        </ng-container>
-        <ng-template #elseTemplate>
-            <img class="col-2 profile-picture" [src]="'http://localhost:3000/' + comment.author[0].avatar" >
-        </ng-template>
-          <div class="post-card col-10" >
-            <p id="username"(click)="$event.stopPropagation()">{{comment.author[0].name}}</p>
-            <p>{{comment.content}}</p>
-          </div>
-          <div *ngIf=' comment.media != "" ' class="post-image">
-            <img class="image" [src]="'http://localhost:3000/'+ comment.media" >
-          </div>
-          <div class="actions">
-            <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(comment._id)"></i>
-            <i class="bi bi-chat">{{comment.replies.length}}</i>
-          </div>
-      </div>
-    </div>
+    <app-new-comment [postId] = "id" *ngIf="addComment == true" class="new-comment"></app-new-comment>
+    <app-comment [comments]="comments"></app-comment>
   </div>
+
+  <div></div>
 
   <div class="messages-container col-3">
     <!-- <div *ngFor="let post of posts.followedUserPost">

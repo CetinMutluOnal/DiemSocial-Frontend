@@ -16,6 +16,7 @@ export class PostDetailComponent implements OnInit {
   post: any;
   comments: any;
   isLiked = false;
+  addComment = false;
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
   constructor(
     private postService: PostService,
@@ -59,4 +60,13 @@ export class PostDetailComponent implements OnInit {
     })
   }
 
+  redirectCommentDetail(commentId: string) {
+    this.router.navigate([`/comment/${commentId}`]);
+  }
+
+  getPostDate(postDate: string) {
+    const date = new Date(postDate);
+
+    return date.toLocaleString();
+  };
 }

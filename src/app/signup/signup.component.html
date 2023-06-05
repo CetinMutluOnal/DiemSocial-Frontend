@@ -1,3 +1,4 @@
+<div class="signup-page-container">
 <div class="main-container">
   <form [formGroup]="form" (ngSubmit)="submitForm()" class="form-container">
       <input type="file"  formControlName="avatar" accept="image/*" id="avatar" class="profile-picture" >
@@ -8,10 +9,14 @@
       <input placeholder="password" type="password" formControlName="password">
     </div>
 
-    <div class="form-group">
+    <div class="signup">
       <button class="btn btn-danger btn-block btn-lg">Sign Up</button>
+      <p id="redirect">Already have an account?
+        <a href="/login">Login</a>
+      </p>
     </div>
 
 
   </form>
+</div>
 </div>

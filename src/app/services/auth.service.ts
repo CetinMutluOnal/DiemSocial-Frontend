@@ -45,11 +45,11 @@ export class AuthService {
   }
 
   async startRefreshTokenTimer() {
-    const refreshTokenIntervalTime = 13 * 60 * 1000
+    const refreshTokenIntervalTime = 14 * 60 * 1000
 
     this.refreshTokenInterval = setInterval(() => {
       this.refresh().subscribe({
-        next: (response) => this.setTokens(response),
+        next: (response) => {this.setTokens(response), console.log(response)},
         error: (error) => console.log(error)
       })
     }, refreshTokenIntervalTime);

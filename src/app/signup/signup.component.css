@@ -1,8 +1,5 @@
 .main-container{
   display: flex;
-  align-self: center;
-  background-color: whitesmoke;
-  margin:auto;
   width: fit-content;
   height: fit-content;
 }
@@ -41,6 +38,25 @@
   width: 20vh;
   height: 20vh;
   object-fit: cover;
+}
+
+.signup-page-container {
+  padding: 1rem;
+  width:100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#redirect {
+  align-self: center;
 }
 
 

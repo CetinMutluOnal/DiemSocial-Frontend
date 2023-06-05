@@ -38,7 +38,6 @@ export class LoginComponent {
           console.log(response);
           this.authService.setTokens(response)
             this.router.navigate(['/feed']);
-            this.authService.startRefreshTokenTimer;
         } catch (error) {
           console.log(error);
         }

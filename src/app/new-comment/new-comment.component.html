@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()" class="form-container">
+  <div class="form-group">
+    <textarea placeholder="Add Comment " class="form-control" formControlName="content" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <input type="file" class="form-control-file" formControlName="media" id="media">
+  </div>
+
+  <button type="submit" class="btn btn-danger">Post</button>
+
+</form>

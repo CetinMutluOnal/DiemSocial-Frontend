@@ -1,0 +1,32 @@
+<div *ngIf="comments.length != 0" class="comments-card">
+  <div *ngFor="let comment of comments" class="post-container" (click)="redirectCommentDetail(comment._id)">
+    <ng-container *ngIf='comment.author[0].avatar == "" ; else elseTemplate'>
+      <img class="col-2 profile-picture" [src]="defaultImagePath" >
+    </ng-container>
+    <ng-template #elseTemplate>
+        <img class="col-2 profile-picture" [src]="'http://localhost:3000/' + comment.author[0].avatar" >
+    </ng-template>
+      <div class="post-card col-10" >
+        <p id="username"(click)="$event.stopPropagation()">{{comment.author[0].name}}</p>
+        <p>{{comment.content}}</p>
+      </div>
+      <div *ngIf=' comment.media != null ' class="post-image">
+        <img class="image" [src]="'http://localhost:3000/'+ comment.media" >
+      </div>
+      <div class="actions">
+        <ng-container *ngIf="comment.likes ; else likeTemplate">
+          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(comment._id)">{{comment.likes.length}}</i>
+        </ng-container>
+        <ng-template #likeTemplate>
+          <i class="bi bi-chat">0</i>
+        </ng-template>
+        <ng-container  *ngIf="comment.replies ; else commentTemplate">
+          <i class="bi bi-chat">{{comment.replies.length}}</i>
+        </ng-container>
+        <ng-template #commentTemplate>
+          <i class="bi bi-chat">0</i>
+        </ng-template>
+        <p>{{getPostDate(comment.createdAt)}}</p>
+      </div>
+  </div>
+</div>

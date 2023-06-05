@@ -1,0 +1,4 @@
+<div class="button-container" [ngSwitch]="isLiked" (click)="buttonClick()">
+  <i *ngSwitchCase="true"  type="button" class="bi bi-star-fill like-button" >{{likesCount}}</i>
+  <i *ngSwitchCase="false" type="button" class="bi bi-star like-button" >{{likesCount}}</i>
+</div>

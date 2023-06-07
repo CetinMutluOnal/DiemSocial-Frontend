@@ -24,7 +24,7 @@
           <img class="image" [src]="'http://localhost:3000/'+ _post.media" >
         </div>
         <div class="actions">
-          <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(_post._id)"> {{_post.likes.length}}</i>
+          <app-like (click)="$event.stopPropagation()" [postId] = "_post._id"></app-like>
           <i class="bi bi-chat" (click)="addComment = true">{{comments.length}}</i>
           <p>{{getPostDate(_post.createdAt)}}</p>
         </div>

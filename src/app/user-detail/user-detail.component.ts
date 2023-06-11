@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { LikeService } from '../services/like.service';
 import { CommentService } from '../services/comment.service';
@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { PostService } from '../services/post.service';
 import { MyResponse } from '../types/response.type';
 import { FollowService } from '../services/follow.service';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -15,15 +16,13 @@ import { FollowService } from '../services/follow.service';
 export class UserDetailComponent implements OnInit{
   username: string | null | undefined;
   isLiked: boolean = false;
+  sendMessage: boolean = false;
   posts: any;
   user: any;
-  follows: any;
-  followers: any;
-  counts= {
-    follows: 0,
-    followers: 0,
-  }
+  follows: any[] = [];
+  followers: any[] = [];
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
+  authenticatedUser: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,12 +30,14 @@ export class UserDetailComponent implements OnInit{
     private likeService: LikeService,
     private postService: PostService,
     private followService: FollowService,
-    private commentService: CommentService,
+    private authService: AuthService,
     private location: Location,
+    private router: Router,
 
     ) {}
 
     ngOnInit() {
+      this.getAuthenticatedUser();
       this.username = this.activatedRoute.snapshot.paramMap.get('username');
       this.userService.getUserByUsername(this.username).subscribe({
         next: (response: MyResponse) => {
@@ -44,10 +45,6 @@ export class UserDetailComponent implements OnInit{
           this.getUserPosts(this.user[0]._id);
           this.getFollows(this.user[0]._id);
           this.getFollowers(this.user[0]._id);
-          this.counts = {
-            followers: this.follows.length,
-            follows: this.follows.length,
-          }
         },
         error: (error) => console.log(error),
       });
@@ -80,8 +77,37 @@ export class UserDetailComponent implements OnInit{
 
     getUserPosts(userId: string) {
       this.postService.getPostByUserId(userId).subscribe({
-        next: (response: MyResponse) => this.posts = response.data,
+        next: (response: MyResponse) => {
+          this.posts = response.data?.filter((post: any) => {
+            if(post.deletedAt != null) return false;
+            return true;
+          });
+        },
         error: (error) => console.log(error),
       })
+    }
+
+    redirectPostDetail(postId: string) {
+      this.router.navigate([`/post/${postId}`]);
+    }
+
+    getAuthenticatedUser() {
+      this.authService.getAuthenticatedUser().subscribe({
+        next: (response:any) => this.authenticatedUser = response?.userId,
+        error: (error) => console.log(error),
+      });
+    }
+
+    getPostDate(postDate: string) {
+      const date = new Date(postDate);
+
+      return date.toLocaleString();
+    };
+
+    deletePost(postId:string) {
+      this.postService.deletePost(postId).subscribe({
+        next: (response: MyResponse) => alert(response.message),
+        error: (error) => console.log(error),
+      });
     }
 }

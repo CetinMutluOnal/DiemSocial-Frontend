@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { MyResponse } from '../types/response.type';
 import { AuthService } from '../services/auth.service';
@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  styleUrls: [ '../app.component.css','./message.component.css', '../feed/feed.component.css']
+  styleUrls: [ '../app.component.css','./message.component.css',]
 })
 export class MessageComponent implements OnInit {
   authenticatedUser: any;
@@ -17,6 +17,7 @@ export class MessageComponent implements OnInit {
   form: FormGroup;
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
   messageDetail = false;
+  @Input() newMessageUserId:any;
   constructor(
     private messageService: MessageService,
     private authService: AuthService,
@@ -31,6 +32,10 @@ export class MessageComponent implements OnInit {
     }
 
   ngOnInit(): void {
+      if (this.newMessageUserId != null) {
+        this.users.push(this.newMessageUserId);
+      };
+
       this.authService.getAuthenticatedUser().subscribe({
         next: (response:any) => this.authenticatedUser = response?.userId,
         error: (error) => console.log(error),

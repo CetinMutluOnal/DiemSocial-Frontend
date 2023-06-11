@@ -23,4 +23,8 @@ export class PostService {
   getPostByUserId(userId: string | null): Observable<any> {
     return this.httpClient.get(`${this.PostPath}/user/${userId}`)
   }
+
+  deletePost(postId: string):Observable<any>{
+    return this.httpClient.delete(`${this.PostPath}/user/${postId}`)
+  }
 }

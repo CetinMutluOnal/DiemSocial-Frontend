@@ -1,0 +1,33 @@
+<div class="main-container">
+  <div class="user-container">
+    <ng-container *ngIf='authenticatedUser.avatar == "" ; else elseTemplate'>
+        <img class="col-4 profile-picture" [src]="defaultImagePath" >
+    </ng-container>
+    <ng-template #elseTemplate>
+        <img class=" col-4 profile-picture" [src]="'http://localhost:3000/' + authenticatedUser.avatar" >
+    </ng-template>
+    <div class="post-card" >
+      <p id="name">{{authenticatedUser.name}}</p>
+      <div id="follows">
+        <p >Following {{follows.length}}</p>
+        <p >Follower {{followers.length}}</p>
+      </div>
+        <i class="bi bi-box-arrow-right" id="logout" (click)="logout()"></i>
+    </div>
+  </div>
+  <div class="recomendations-badge">
+    <p id="recommendation-text">People to Follow</p>
+  </div>
+  <div class="recommendations-container" *ngFor="let profile of recommendations">
+    <ng-container *ngIf='profile.avatar == "" ; else elseTemplate'>
+      <img class="col-4 profile-picture" [src]="defaultImagePath" >
+    </ng-container>
+    <ng-template #elseTemplate>
+      <img class=" col-4 profile-picture" [src]="'http://localhost:3000/' + profile.avatar" >
+    </ng-template>
+    <div class="discover-card col-8" >
+      <p id="name" (click)="redirectUserDetail(profile.username)" >{{profile.name}}</p>
+      <app-follow [userId]="profile._id"></app-follow>
+    </div>
+  </div>
+</div>

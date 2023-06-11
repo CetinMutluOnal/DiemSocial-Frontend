@@ -1,0 +1,71 @@
+p{
+  margin: 0;
+}
+.main-container{
+  display: flex;
+  flex-direction: column;
+}
+.profile-picture {
+  max-width: 4rem;
+  max-height:4rem ;
+  border:1px solid var(--nest);
+  border-radius: 50%;
+  margin: auto;
+  object-fit: cover;
+}
+
+.user-container{
+  display: flex;
+  flex-direction: column;
+  justify-content:center ;
+  flex-wrap: nowrap;
+  padding: 0.5rem;
+  background-color: var(--nest);
+  border-bottom: 1px solid var(--nest);
+  color: snow;
+}
+
+.recommendations-container{
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  color: var(--nest);
+}
+
+.discover-card{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.post-card{
+  display: flex;
+  flex-direction: column;
+}
+
+#follows{
+  display: flex;
+  justify-content: space-around;
+}
+
+#name {
+  align-self: center;
+}
+#logout {
+  font-size: x-large;
+  align-self: center;
+}
+
+.recomendations-badge{
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:snow;
+  color: var(--nest);
+  border-bottom: 1px solid var(--nest);
+}
+
+#recommendation-text{
+  margin: 0;
+}

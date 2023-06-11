@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token } from '../types/token.type';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthService {
   signIn(data: any) {
     return this.httpClient.post(`${this.authUrl}/login`, data);
   }
-  getAuthenticatedUser(){
+  getAuthenticatedUser(): Observable<any> {
     return this.httpClient.get(`${this.authUrl}/profile`, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),

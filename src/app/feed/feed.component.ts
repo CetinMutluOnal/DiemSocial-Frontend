@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostDetailComponent } from '../post-detail/post-detail.component';
 import { LikeService } from '../services/like.service';
 import { MyResponse } from '../types/response.type';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-feed',
@@ -16,13 +17,14 @@ export class FeedComponent implements OnInit {
   follows: Array<object> | any = [];
   isLiked = false;
   isMessageClicked = false;
+  authenticatedUser:any;
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
-
 
   constructor(
     private feedService: FeedService,
     private authService:AuthService,
     private likeService: LikeService,
+    private userService: UserService,
     private router: Router,
     ) {}
 

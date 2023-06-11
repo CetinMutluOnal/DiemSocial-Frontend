@@ -1,6 +1,6 @@
 <div class="feed-container">
   <div class="profile-container col-3">
-    <button (click) = "logout()" class="btn btn-warning btn-block btn-m">Logout</button>
+    <app-my-profile></app-my-profile>
   </div>
   <div class="posts-container col-6">
     <app-new-post></app-new-post>
@@ -23,7 +23,7 @@
         <div class="actions">
           <app-like (click)="$event.stopPropagation()" [postId] = "followed.post._id"></app-like>
           <i class="bi bi-chat"  (click)="redirectPostDetail(followed.post._id)">{{followed.post.comments.length}}</i>
-          <p>{{getPostDate(followed.post.createdAt)}}</p>
+          <p id="date">{{getPostDate(followed.post.createdAt)}}</p>
         </div>
     </div>
   </div>

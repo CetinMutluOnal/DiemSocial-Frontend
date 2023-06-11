@@ -2,7 +2,7 @@
   <div class="profile-container col-3">
     <button class="btn btn-warning btn-block btn-m">Logout</button>
   </div>
-  <div class="posts-container col-6" *ngFor="let _user of user ">
+  <div class="main-container col-6" *ngFor="let _user of user ">
       <div class="header col-4">
         <a class="bi bi-arrow-left" (click)="returnLastPage()"></a>
         <p>Profile</p>
@@ -17,16 +17,19 @@
     <div class="about">
       <p>{{_user.name}}</p>
       <p>{{_user.username}}</p>
-      <p>Following {{counts.follows}}</p>
-      <p>Follower {{counts.followers}}</p>
+      <p>Following {{follows.length}}</p>
+      <p>Follower {{followers.length}}</p>
     </div>
     <div class="interactions">
-      <i class="bi bi-person-add fa-sm"></i>
-      <i class="bi bi-envelope bi-xl"></i>
+      <i class="bi bi-envelope bi-xl" (click)="sendMessage = true">
+      </i>
       <app-follow [userId]="_user._id"></app-follow>
     </div>
     </div>
-    <div class="post-container" *ngFor="let post of posts ">
+    <div class="posts-badge">
+      <p>Posts</p>
+    </div>
+    <div class="post-container" *ngFor="let post of posts" (click)="redirectPostDetail(post._id)">
       <ng-container *ngIf='_user.avatar == "" || null ; else elseTemplate'>
           <img class="col-2 profile-picture" [src]="defaultImagePath" >
       </ng-container>
@@ -44,6 +47,8 @@
         <div class="actions">
           <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(post[0]._id)"> {{post.likes.length}}</i>
           <i class="bi bi-chat">{{post.comments.length}}</i>
+          <i *ngIf="authenticatedUser == _user._id"class="bi bi-trash" (click)="likePost(post[0]._id)"></i>
+          <p id="date">{{getPostDate(post.createdAt)}}</p>
         </div>
     </div>
   </div>

@@ -16,6 +16,14 @@ export class FollowService {
     return this.httpClient.get(`${this.followPath}/followers/${userId}`)
   }
 
+  getRecommendations(): Observable<any> {
+    return this.httpClient.get(`${this.followPath}/discover/users`,{
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+      }),
+    });
+  }
+
   followUser(userId: string): Observable<any>{
     return this.httpClient.post(`${this.followPath}/${userId}`,null,{
       headers: new HttpHeaders({

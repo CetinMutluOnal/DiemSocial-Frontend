@@ -7,11 +7,15 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AuthGuard } from './guard/auth.guard';
 import { CommentDetailComponent } from './comment-detail/comment-detail.component';
+import { MessageComponent } from './message/message.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'feed', component: FeedComponent,
+  canActivate: [AuthGuard],
+},
+{path: 'message', component: MessageComponent,
   canActivate: [AuthGuard],
 },
   {path: 'post', children: [

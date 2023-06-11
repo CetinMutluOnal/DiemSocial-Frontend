@@ -15,7 +15,8 @@ import { CommentDetailComponent } from './comment-detail/comment-detail.componen
 import { CommentComponent } from './comment/comment.component';
 import { NewCommentComponent } from './new-comment/new-comment.component';
 import { LikeComponent } from './like/like.component';
-import { FollowComponent } from './follow/follow.component'
+import { FollowComponent } from './follow/follow.component';
+import { MessageComponent } from './message/message.component'
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FollowComponent } from './follow/follow.component'
     NewCommentComponent,
     LikeComponent,
     FollowComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,

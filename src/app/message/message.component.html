@@ -1,0 +1,49 @@
+<div class="message-container">
+  <div class="users-container col-2">
+    <div class="user-container" *ngFor="let user of users" (click)="getMessages(user[0]._id)">
+      <ng-container *ngIf='user[0].avatar == "" ; else elseTemplate'>
+          <img class="col-4 profile-picture" [src]="defaultImagePath" >
+      </ng-container>
+      <ng-template #elseTemplate>
+          <img class=" col-4 profile-picture" [src]="'http://localhost:3000/' + user[0].avatar" >
+      </ng-template>
+      <div class="post-card col-8" >
+        <p id="name" >{{user[0].name}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="chat-container col-9">
+    <div class="messages" *ngFor="let message of messages">
+        <div *ngIf="message.senderId == authenticatedUser" class="sent message">
+          <p class="col-9"> {{message.content}} </p>
+          <p class="col-3" id="date"> {{getPostDate(message.createdAt)}} </p>
+          <div *ngIf="message.media != null ">
+            <img class="image" [src]="'http://localhost:3000/' + message.media" >
+          </div>
+        </div>
+
+
+        <div *ngIf="message.receiverId == authenticatedUser" class="received message">
+          <p class="col-9"> {{message.content}} </p>
+          <p class="col-3" id="date"> {{getPostDate(message.createdAt)}} </p>
+        </div>
+    </div>
+
+    <form *ngIf="messageDetail" [formGroup]="form" (ngSubmit)="submitForm(user)" class="form-container">
+      <div class="form-group col-8">
+        <textarea placeholder="New Message " class="form-control" formControlName="content" rows="1"></textarea>
+      </div>
+      <div class="form-group col-2 file">
+        <input type="file" title="" class="form-control-file" formControlName="media" id="media">
+        <label for="media">
+          <i class="bi bi-file-earmark-arrow-up-fill" id="upload"></i>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-danger col-2">Send</button>
+
+    </form>
+  </div>
+</div>
+
+

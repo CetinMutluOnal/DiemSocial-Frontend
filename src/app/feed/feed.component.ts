@@ -15,6 +15,7 @@ export class FeedComponent implements OnInit {
   userId: string[] = [];
   follows: Array<object> | any = [];
   isLiked = false;
+  isMessageClicked = false;
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
 
 

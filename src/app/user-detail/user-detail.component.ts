@@ -23,6 +23,7 @@ export class UserDetailComponent implements OnInit{
   followers: any[] = [];
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
   authenticatedUser: any;
+  isMessageClicked = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,

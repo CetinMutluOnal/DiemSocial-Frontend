@@ -2,7 +2,7 @@
   <div class="profile-container col-3">
     <app-my-profile></app-my-profile>
   </div>
-  <div class="posts-container col-6">
+  <div class="posts-container col-5">
     <app-new-post></app-new-post>
     <div class="post-container" *ngFor="let followed of follows" (click)="redirectPostDetail(followed.post._id)">
         <ng-container *ngIf='followed.user.avatar == "" ; else elseTemplate'>
@@ -14,7 +14,7 @@
 
 
         <div class="post-card col-10" >
-          <p id="username"(click)="$event.stopPropagation(); redirectUserDetail(followed.user.username)">{{followed.user.name}}</p>
+          <p id="username" type="button" (click)="$event.stopPropagation(); redirectUserDetail(followed.user.username)">{{followed.user.name}}</p>
           <p>{{ followed.post.content}}</p>
         </div>
         <div *ngIf="followed.post.media != null" class="post-image">
@@ -22,14 +22,14 @@
         </div>
         <div class="actions">
           <app-like (click)="$event.stopPropagation()" [postId] = "followed.post._id"></app-like>
-          <i class="bi bi-chat"  (click)="redirectPostDetail(followed.post._id)">{{followed.post.comments.length}}</i>
+          <i class="bi bi-chat" type="button" (click)="redirectPostDetail(followed.post._id)">{{followed.post.comments.length}}</i>
           <p id="date">{{getPostDate(followed.post.createdAt)}}</p>
         </div>
     </div>
   </div>
 
   <div class="messages-container col-3">
-    <button class="btn btn-primary open" (click)="isMessageClicked = !isMessageClicked">Messages</button>
+    <button class="btn btn-danger open" (click)="isMessageClicked = !isMessageClicked">Messages</button>
     <app-message *ngIf="isMessageClicked"></app-message>
   </div>
 </div>

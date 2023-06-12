@@ -35,7 +35,14 @@ export class FeedComponent implements OnInit {
           this.follows = response.data;
           console.log(this.follows);
         } ,
-        error: (error) => console.log(error),
+        error: (error) => {
+          if (error.status == 401) {
+            this.redirectLogin();
+          }
+          else {
+            console.log(error);
+          }
+        },
       });
   }
 
@@ -54,6 +61,10 @@ export class FeedComponent implements OnInit {
 
   redirectUserDetail(username: string) {
     this.router.navigate([`/user/${username}`]);
+  }
+
+  redirectLogin() {
+    this.router.navigate(['login']);
   }
 
   likePost(postId:string) {

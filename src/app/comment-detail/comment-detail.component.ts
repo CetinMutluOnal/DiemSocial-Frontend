@@ -16,6 +16,7 @@ export class CommentDetailComponent implements OnInit {
   comment: any;
   isLiked = false;
   addComment = false;
+  isMessageClicked = false;
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
 
   constructor(
@@ -32,7 +33,14 @@ export class CommentDetailComponent implements OnInit {
       next: (response: MyResponse) => {
         this.comment = response.data
       },
-      error: (error) => console.log(error),
+      error: (error) => {
+        if (error.status == 401) {
+          this.redirectLogin();
+        }
+        else {
+          console.log(error);
+        }
+      },
     })
   }
 
@@ -49,6 +57,14 @@ export class CommentDetailComponent implements OnInit {
 
   redirectCommentDetail(commentId: string) {
     this.router.navigate([`/comment/${commentId}`]);
+  }
+
+  redirectUserDetail(userId: string) {
+    this.router.navigate([`/user/${userId}`]);
+  }
+
+  redirectLogin() {
+    this.router.navigate(['login']);
   }
 
   getCommentDate(postDate: string) {

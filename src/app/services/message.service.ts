@@ -26,6 +26,14 @@ export class MessageService {
     });
   };
 
+  startConversation(): Observable<any>{
+    return this.httpClient.get(`${this.messagePath}/new/conversation`, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+      }),
+    });
+  };
+
   getMessages(userId: string): Observable<any>{
     return this.httpClient.get(`${this.messagePath}/find/${userId}`, {
       headers: new HttpHeaders({

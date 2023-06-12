@@ -1,5 +1,6 @@
 .feed-container{
   margin-top: 1.5rem;
+  padding: 0 1rem;
   display: flex;
   justify-content: space-between;
   gap: 1rem;

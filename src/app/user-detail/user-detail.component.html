@@ -1,8 +1,8 @@
 <div class="feed-container">
-  <div class="profile-container col-3">
-    <button class="btn btn-warning btn-block btn-m">Logout</button>
+    <div class="profile-container col-3">
+      <app-my-profile></app-my-profile>
   </div>
-  <div class="main-container col-6" *ngFor="let _user of user ">
+  <div class="main-container col-5" *ngFor="let _user of user ">
       <div class="header col-4">
         <a class="bi bi-arrow-left" (click)="returnLastPage()"></a>
         <p>Profile</p>
@@ -54,6 +54,8 @@
   </div>
 
   <div class="messages-container col-3">
+    <button class="btn btn-danger open" (click)="isMessageClicked = !isMessageClicked">Messages</button>
+    <app-message *ngIf="isMessageClicked"></app-message>
   </div>
 </div>
 

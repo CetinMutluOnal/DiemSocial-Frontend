@@ -7,12 +7,12 @@
         <img class=" col-4 profile-picture" [src]="'http://localhost:3000/' + authenticatedUser.avatar" >
     </ng-template>
     <div class="post-card" >
-      <p id="name">{{authenticatedUser.name}}</p>
+      <p id="name" type="button" (click)="redirectUserDetail(authenticatedUser.username)">{{authenticatedUser.name}}</p>
       <div id="follows">
         <p >Following {{follows.length}}</p>
         <p >Follower {{followers.length}}</p>
       </div>
-        <i class="bi bi-box-arrow-right" id="logout" (click)="logout()"></i>
+        <i class="bi bi-box-arrow-right" id="logout" type="button" (click)="logout()"></i>
     </div>
   </div>
   <div class="recomendations-badge">
@@ -26,7 +26,7 @@
       <img class=" col-4 profile-picture" [src]="'http://localhost:3000/' + profile.avatar" >
     </ng-template>
     <div class="discover-card col-8" >
-      <p id="name" (click)="redirectUserDetail(profile.username)" >{{profile.name}}</p>
+      <p id="name" type="button" (click)="redirectUserDetail(profile.username)" >{{profile.name}}</p>
       <app-follow [userId]="profile._id"></app-follow>
     </div>
   </div>

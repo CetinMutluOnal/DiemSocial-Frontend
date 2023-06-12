@@ -1,18 +1,36 @@
 <div class="message-container">
-  <div class="users-container col-2">
-    <div class="user-container" *ngFor="let user of users" (click)="getMessages(user[0]._id)">
-      <ng-container *ngIf='user[0].avatar == "" ; else elseTemplate'>
+  <div class="users-navigation">
+    <div class="users-container">
+      <div class="user-container" *ngFor="let user of users" (click)="getMessages(user[0]._id)">
+        <ng-container *ngIf='user[0].avatar == "" ; else elseTemplate'>
+            <img class="col-4 profile-picture" [src]="defaultImagePath" >
+        </ng-container>
+        <ng-template #elseTemplate>
+            <img class=" col-4 profile-picture" [src]="'http://localhost:3000/' + user[0].avatar" >
+        </ng-template>
+        <div class="post-card col-8" >
+          <p id="name" >{{user[0].name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="recomendations-badge">
+      <p id="recommendation-text">Start New Conversation</p>
+    </div>
+    <div class="recommendations-container">
+      <div class="recommendation" *ngFor="let profile of newConversation" (click)="getMessages(profile._id)">
+        <ng-container *ngIf='profile.avatar == "" ; else elseTemplate'>
           <img class="col-4 profile-picture" [src]="defaultImagePath" >
-      </ng-container>
-      <ng-template #elseTemplate>
-          <img class=" col-4 profile-picture" [src]="'http://localhost:3000/' + user[0].avatar" >
-      </ng-template>
-      <div class="post-card col-8" >
-        <p id="name" >{{user[0].name}}</p>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <img class=" col-4 profile-picture" [src]="'http://localhost:3000/' + profile.avatar" >
+        </ng-template>
+        <div class="discover-card col-8" >
+          <p id="new-message-name" (click)="redirectUserDetail(profile.username)" >{{profile.name}}</p>
+        </div>
       </div>
     </div>
   </div>
-  <div class="chat-container col-9">
+  <div class="chat-container" *ngIf="messages">
     <div class="messages" *ngFor="let message of messages">
         <div *ngIf="message.senderId == authenticatedUser" class="sent message">
           <p class="col-9"> {{message.content}} </p>

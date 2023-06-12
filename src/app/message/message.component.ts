@@ -3,6 +3,7 @@ import { MessageService } from '../services/message.service';
 import { MyResponse } from '../types/response.type';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-message',
@@ -17,12 +18,14 @@ export class MessageComponent implements OnInit {
   form: FormGroup;
   defaultImagePath: string = 'http://localhost:3000/images/avatar/default.jpg';
   messageDetail = false;
+  newConversation:any;
   @Input() newMessageUserId:any;
   constructor(
     private messageService: MessageService,
     private authService: AuthService,
     public fb: FormBuilder,
     private el:ElementRef,
+    private router: Router,
 
     ) {
       this.form = this.fb.group({
@@ -32,18 +35,22 @@ export class MessageComponent implements OnInit {
     }
 
   ngOnInit(): void {
-      if (this.newMessageUserId != null) {
-        this.users.push(this.newMessageUserId);
-      };
-
       this.authService.getAuthenticatedUser().subscribe({
         next: (response:any) => this.authenticatedUser = response?.userId,
-        error: (error) => console.log(error),
+        error: (error) => {
+          if (error.status == 401) {
+            this.redirectLogin();
+          }
+          else {
+            console.log(error);
+          }
+        },
       });
 
       this.messageService.getMessagedUsers().subscribe({
         next: (response: MyResponse) => {
           this.users = response.data,
+          this.getUsersToStartConversation();
            console.log(response.data)
           },
         error: (error) => console.log(error),
@@ -56,6 +63,16 @@ export class MessageComponent implements OnInit {
     this.messageService.getMessages(userId).subscribe({
       next: (response: MyResponse) => {
         this.messages = response.data,
+         console.log(response.data)
+        },
+        error: (error) => console.log(error),
+    });
+  }
+
+  getUsersToStartConversation(){
+    this.messageService.startConversation().subscribe({
+      next: (response: MyResponse) => {
+        this.newConversation = response.data,
          console.log(response.data)
         },
         error: (error) => console.log(error),
@@ -90,5 +107,12 @@ export class MessageComponent implements OnInit {
 
     return date.toLocaleString();
   };
+  
+  redirectLogin() {
+    this.router.navigate(['login']);
+  }
 
+  redirectUserDetail(username: string) {
+    this.router.navigate([`/user/${username}`]);
+  }
 }

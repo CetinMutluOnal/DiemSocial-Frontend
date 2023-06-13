@@ -5,7 +5,7 @@
   <div class="posts-container col-5" *ngFor="let _comment of comment">
       <div class="header col-4">
         <a class="bi bi-arrow-left" (click)="returnLastPage()"></a>
-        <p>Post</p>
+        <p>Comment</p>
     </div>
     <div class="post-container">
       <ng-container *ngIf='_comment.author[0].avatar == "" ; else elseTemplate'>

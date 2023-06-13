@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignupComponent implements OnInit{
   form: FormGroup;
-  constructor(public fb: FormBuilder, private httpClient: HttpClient, private authService: AuthService, private el: ElementRef) {
+  constructor(
+    public fb: FormBuilder,
+    private httpClient: HttpClient,
+    private authService: AuthService,
+    private el: ElementRef,
+    private router: Router,
+
+    ) {
     this.form = this.fb.group({
       name:[''],
       username:[''],
@@ -44,7 +52,7 @@ export class SignupComponent implements OnInit{
 
 
     this.authService.signUp(formData).subscribe({
-      next: (response) => console.log(response),
+      next: (response) => this.router.navigate(['login']),
       error: (error) => console.log(error.message, formData),
     });
 

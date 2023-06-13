@@ -10,6 +10,7 @@ import { CommentDetailComponent } from './comment-detail/comment-detail.componen
 import { MessageComponent } from './message/message.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/login',pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'feed', component: FeedComponent,

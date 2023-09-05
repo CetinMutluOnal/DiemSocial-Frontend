@@ -1,0 +1,31 @@
+<div class="container">
+<table class="table table-striped">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">PP</th>
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Username</th>
+    <th scope="col">Email</th>
+    <th scope="col">Actions</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let user of users">
+    <td scope="row"> <ng-container *ngIf='user.avatar == "" ; else elseTemplate'>
+      <img class="profile-picture" [src]="defaultImagePath" >
+  </ng-container>
+  <ng-template #elseTemplate>
+      <img class="profile-picture" [src]="'http://localhost:3000/' + user.avatar" >
+  </ng-template></td>
+    <td scope="row">{{ user._id }}</td>
+    <td scope="row">{{ user.name }}</td>
+    <td scope="row">{{ user.username }}</td>
+    <td scope="row">{{ user.email }}</td>
+    <td scope="row">
+      <button class="btn btn-danger" (click)="deleteUser(user._id)"><i class=" bi bi-trash"></i></button>
+      <button class="btn btn-warning" (click)="deleteUser(user._id)"><i class=" bi bi-pencil-square"></i></button>
+    </td>
+  </tbody>
+</table>
+</div>

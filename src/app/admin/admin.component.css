@@ -1,0 +1,35 @@
+.admin-container{
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+.navigation {
+  height: 100vh;
+  float: left;
+  background-color: var(--nest);
+}
+
+#links{
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: white;
+  align-items: center;
+}
+ #logo{
+  background-color: white;
+  color: var(--nest);
+  font-size: xx-large;
+  display: inline-block;
+ }
+
+#links li {
+  list-style-type: none;
+  font-size: x-large;
+}
+
+.panel{
+  height: 100vh;
+  overflow: scroll;
+}

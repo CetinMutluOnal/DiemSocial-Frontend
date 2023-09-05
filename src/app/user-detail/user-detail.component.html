@@ -47,7 +47,7 @@
         <div class="actions">
           <i [ngClass]="{'bi bi-star-fill': isLiked, 'bi bi-star': !isLiked}" (click)="likePost(post[0]._id)"> {{post.likes.length}}</i>
           <i class="bi bi-chat">{{post.comments.length}}</i>
-          <i *ngIf="authenticatedUser == _user._id"class="bi bi-trash" (click)="likePost(post[0]._id)"></i>
+          <i *ngIf="authenticatedUser == _user._id"class="bi bi-trash" (click)="$event.stopPropagation(); deletePost(post._id)"></i>
           <p id="date">{{getPostDate(post.createdAt)}}</p>
         </div>
     </div>

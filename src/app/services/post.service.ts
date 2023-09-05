@@ -25,6 +25,6 @@ export class PostService {
   }
 
   deletePost(postId: string):Observable<any>{
-    return this.httpClient.delete(`${this.PostPath}/user/${postId}`)
+    return this.httpClient.delete(`${this.PostPath}/${postId}`)
   }
 }

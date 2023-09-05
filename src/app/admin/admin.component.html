@@ -1,0 +1,20 @@
+<div class="admin-container">
+  <div class="navigation col-3">
+      <ul id="links">
+        <li> <span id="logo">
+          <i class="bi bi-house">Diem</i>
+        </span></li>
+        <li type="button" (click)="choosenComponent = 'dashboard'">Dashboard</li>
+        <li type="button" (click)="choosenComponent = 'users'">Users</li>
+        <li type="button" (click)="choosenComponent = 'posts'">Posts</li>
+        <li type="button" (click)="choosenComponent = 'comments'">Comments</li>
+      </ul>
+    </div>
+
+  <div *ngIf="choosenComponent != null" [ngSwitch]="choosenComponent" class="panel col-8">
+      <admin-users  *ngSwitchCase="'users'"></admin-users>
+      <admin-posts *ngSwitchCase="'posts'"></admin-posts>
+      <admin-comments *ngSwitchCase="'comments'"></admin-comments>
+      <admin-dashboard *ngSwitchDefault></admin-dashboard>
+  </div>
+</div>

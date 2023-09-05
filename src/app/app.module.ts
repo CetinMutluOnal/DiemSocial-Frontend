@@ -18,6 +18,11 @@ import { LikeComponent } from './like/like.component';
 import { FollowComponent } from './follow/follow.component';
 import { MessageComponent } from './message/message.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { AdminComponent } from './admin/admin.component';
+import { UsersComponent } from './admin/users/users.component';
+import { PostsComponent } from './admin/posts/posts.component';
+import { CommentsComponent } from './admin/comments/comments.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,11 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     FollowComponent,
     MessageComponent,
     MyProfileComponent,
+    AdminComponent,
+    UsersComponent,
+    PostsComponent,
+    CommentsComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

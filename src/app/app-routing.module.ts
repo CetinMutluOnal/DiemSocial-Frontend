@@ -8,9 +8,12 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AuthGuard } from './guard/auth.guard';
 import { CommentDetailComponent } from './comment-detail/comment-detail.component';
 import { MessageComponent } from './message/message.component';
+import { AdminComponent } from './admin/admin.component';
+import { UsersComponent } from './admin/users/users.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login',pathMatch: 'full'},
+  {path: 'admin-user', component: UsersComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'feed', component: FeedComponent,
@@ -28,6 +31,9 @@ const routes: Routes = [
   {path: 'comment', children: [
     {path: ':id', component: CommentDetailComponent}
   ]},
+  {path: 'admin', component: AdminComponent,
+  canActivate: [AuthGuard],
+}
 ];
 
 @NgModule({
